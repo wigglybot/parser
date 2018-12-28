@@ -15,5 +15,6 @@ COPY --from=builder /install /usr/local
 COPY app /app
 
 WORKDIR /app
+RUN chmod +x ./wait-for
 
-CMD ["gunicorn", "-w 4", "--bind", "0.0.0.0:8000", "slackwatcher.wsgi"]
+CMD ["./wait-for", "eventstore:2113", "--", "python", "parser/app.py"]
