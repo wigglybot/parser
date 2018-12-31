@@ -10,9 +10,12 @@ CONFIG["version"]["REVISION"] = str(int(CONFIG["version"]["REVISION"]) + 1)
 
 VERSION = ''.join([
     CONFIG["version"]["MAJOR"],
+    ".",
     CONFIG["version"]["MINOR"],
+    ".",
     CONFIG["version"]["REVISION"]
 ])
+
 
 run(
     "git flow release start %s" % VERSION,
@@ -20,5 +23,8 @@ run(
     check=True
 )
 
+
 with open(CONFIG_PATH, 'w') as configfile:
     CONFIG.write(configfile)
+
+print(VERSION)
