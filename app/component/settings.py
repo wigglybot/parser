@@ -6,30 +6,30 @@ import urllib
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 CONFIG = ConfigObj(os.path.join(dir_path, "config.ini"))
-environ = os.getenv("environ", CONFIG["config"]["environ"])
+ENVIRON = os.getenv("ENVIRON", CONFIG["config"]["ENVIRON"])
 
-EVENT_STORE_URL = os.getenv("event_store_url", CONFIG[environ]["event_store_url"])
-EVENT_STORE_HTTP_PORT = int(os.getenv("event_store_http_port", CONFIG[environ]["event_store_http_port"]))
-EVENT_STORE_TCP_PORT = int(os.getenv("event_store_tcp_port", CONFIG[environ]["event_store_tcp_port"]))
-EVENT_STORE_USER = os.getenv("event_store_user", CONFIG[environ]["event_store_user"])
-EVENT_STORE_PASS = os.getenv("event_store_pass", CONFIG[environ]["event_store_pass"])
+EVENT_STORE_URL = os.getenv("EVENT_STORE_URL", CONFIG[ENVIRON]["EVENT_STORE_URL"])
+EVENT_STORE_HTTP_PORT = int(os.getenv("EVENT_STORE_HTTP_PORT", CONFIG[ENVIRON]["EVENT_STORE_HTTP_PORT"]))
+EVENT_STORE_TCP_PORT = int(os.getenv("EVENT_STORE_TCP_PORT", CONFIG[ENVIRON]["EVENT_STORE_TCP_PORT"]))
+EVENT_STORE_USER = os.getenv("EVENT_STORE_USER", CONFIG[ENVIRON]["EVENT_STORE_USER"])
+EVENT_STORE_PASS = os.getenv("EVENT_STORE_PASS", CONFIG[ENVIRON]["EVENT_STORE_PASS"])
 
-MONGO_URL = os.getenv("mongo_url", CONFIG[environ]["mongo_url"])
-MONGO_PORT = int(os.getenv("mongo_port", CONFIG[environ]["mongo_port"]))
-MONGO_USER = urllib.parse.quote_plus(os.getenv("mongo_user", CONFIG[environ]["mongo_user"]))
-MONGO_PASS = urllib.parse.quote_plus(os.getenv("mongo_pass", CONFIG[environ]["mongo_pass"]))
+MONGO_URL = os.getenv("MONGO_URL", CONFIG[ENVIRON]["MONGO_URL"])
+MONGO_PORT = int(os.getenv("MONGO_PORT", CONFIG[ENVIRON]["MONGO_PORT"]))
+MONGO_USER = urllib.parse.quote_plus(os.getenv("MONGO_USER", CONFIG[ENVIRON]["MONGO_USER"]))
+MONGO_PASS = urllib.parse.quote_plus(os.getenv("MONGO_PASS", CONFIG[ENVIRON]["MONGO_PASS"]))
 
-LOGGER_LEVEL = int(os.getenv("logger_level", CONFIG[environ]["logger_level"]))
+LOGGER_LEVEL = int(os.getenv("LOGGER_LEVEL", CONFIG[ENVIRON]["LOGGER_LEVEL"]))
 LOGGER_FORMAT = '%(asctime)s [%(name)s] %(message)s'
 
-V_MA = CONFIG["version"]["major"]
-V_MI = CONFIG["version"]["minor"]
-V_RE = CONFIG["version"]["revision"]
-V_DATE = CONFIG["version"]["date"]
-CODENAME = CONFIG["version"]["codename"]
+V_MA = CONFIG["version"]["MAJOR"]
+V_MI = CONFIG["version"]["MINOR"]
+V_RE = CONFIG["version"]["REVISION"]
+V_DATE = CONFIG["version"]["DATE"]
+CODENAME = CONFIG["version"]["CODENAME"]
 
 logging.basicConfig(format=LOGGER_FORMAT, datefmt='[%H:%M:%S]')
-log = logging.getLogger("parser")
+log = logging.getLogger("aggregate")
 
 """
 CRITICAL 50
