@@ -9,17 +9,17 @@ CONFIG = ConfigObj(os.path.join(dir_path, "config.ini"))
 environ = os.getenv("environ", CONFIG["config"]["environ"])
 
 EVENT_STORE_URL = os.getenv("event_store_url", CONFIG[environ]["event_store_url"])
-EVENT_STORE_HTTP_PORT = int(os.getenv("event_store_http_port", config[environ]["event_store_http_port"]))
-EVENT_STORE_TCP_PORT = int(os.getenv("event_store_tcp_port", config[environ]["event_store_tcp_port"]))
-EVENT_STORE_USER = os.getenv("event_store_user", config[environ]["event_store_user"])
-EVENT_STORE_PASS = os.getenv("event_store_pass", config[environ]["event_store_pass"])
+EVENT_STORE_HTTP_PORT = int(os.getenv("event_store_http_port", CONFIG[environ]["event_store_http_port"]))
+EVENT_STORE_TCP_PORT = int(os.getenv("event_store_tcp_port", CONFIG[environ]["event_store_tcp_port"]))
+EVENT_STORE_USER = os.getenv("event_store_user", CONFIG[environ]["event_store_user"])
+EVENT_STORE_PASS = os.getenv("event_store_pass", CONFIG[environ]["event_store_pass"])
 
-MONGO_URL = os.getenv("mongo_url", config[environ]["mongo_url"])
-MONGO_PORT = int(os.getenv("mongo_port", config[environ]["mongo_port"]))
-MONGO_USER = urllib.parse.quote_plus(os.getenv("mongo_user", config[environ]["mongo_user"]))
-MONGO_PASS = urllib.parse.quote_plus(os.getenv("mongo_pass", config[environ]["mongo_pass"]))
+MONGO_URL = os.getenv("mongo_url", CONFIG[environ]["mongo_url"])
+MONGO_PORT = int(os.getenv("mongo_port", CONFIG[environ]["mongo_port"]))
+MONGO_USER = urllib.parse.quote_plus(os.getenv("mongo_user", CONFIG[environ]["mongo_user"]))
+MONGO_PASS = urllib.parse.quote_plus(os.getenv("mongo_pass", CONFIG[environ]["mongo_pass"]))
 
-LOGGER_LEVEL = int(os.getenv("logger_level", config[environ]["logger_level"]))
+LOGGER_LEVEL = int(os.getenv("logger_level", CONFIG[environ]["logger_level"]))
 LOGGER_FORMAT = '%(asctime)s [%(name)s] %(message)s'
 
 V_MA = CONFIG["version"]["major"]
