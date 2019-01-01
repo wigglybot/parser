@@ -15,35 +15,37 @@ steps:
   - xsltproc -o junit.xml /opt/pytest-xunit.xsl pytest.xml
   - curl -H "X-JFrog-Art-Api:$${REPOSITORY_KEY}" -T junit.xml "$${ARTIFACTORY_URL}/artifactory/wigglybot/${DRONE_COMMIT_BRANCH}/parser/junit.xml"
 
-- name: docker pcp1976
-  pull: true
+- name: "docker pcp1976"
   image: plugins/docker
-  when:
-    branch:
-    - develop
+  pull: true
   settings:
-    username:
-      from_secret: HUB_USER
     password:
       from_secret: HUB_PASS
     repo: pcp1976/parser
-    tags: [ ${DRONE_BUILD_NUMBER}, latest ]
+    tags:
+      - "${DRONE_BUILD_NUMBER}"
+      - latest
+    username:
+      from_secret: HUB_USER
+  when:
+    branch: develop
+
 
 - name: docker
   pull: true
   image: plugins/docker
-  when:
-    branch:
-    - master
-    event:
-    - tag
   settings:
     username:
       from_secret: HUB_USER
     password:
       from_secret: HUB_PASS
     repo: wigglybot/parser
-    tags: [ ${DRONE_TAG}, latest ]
+    tags:
+    - "${DRONE_TAG}"
+    - latest
+  when:
+    branch: master
+    event: tag
 
 - name: upload archive
   image: pcp1976/pytest-3.7:1.0.7
