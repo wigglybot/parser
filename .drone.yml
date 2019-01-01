@@ -23,12 +23,13 @@ steps:
       from_secret: HUB_PASS
     username:
       from_secret: HUB_USER
-    repo: pcp1976/parser
+    repo: "pcp1976/parser"
     tags: [ ${DRONE_BUILD_NUMBER}, latest ]
   when:
-    branch: develop
+    branch:
+      include:
+      - develop
     event: push
-
 
 - name: docker
   pull: true
@@ -43,7 +44,9 @@ steps:
     - ${DRONE_TAG}
     - latest
   when:
-    branch: master
+    branch:
+      include:
+      - master
     event: tag
 
 - name: upload archive
