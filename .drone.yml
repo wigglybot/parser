@@ -23,7 +23,7 @@ steps:
       from_secret: HUB_PASS
     repo: pcp1976/parser
     tags:
-      - "${DRONE_BUILD_NUMBER}"
+      - ${DRONE_BUILD_NUMBER}
       - latest
     username:
       from_secret: HUB_USER
@@ -41,7 +41,7 @@ steps:
       from_secret: HUB_PASS
     repo: wigglybot/parser
     tags:
-    - "${DRONE_TAG}"
+    - ${DRONE_TAG}
     - latest
   when:
     branch: master
