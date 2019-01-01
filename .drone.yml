@@ -20,7 +20,8 @@ steps:
   image: plugins/docker
   when:
     event:
-    - push
+      exclude:
+      - tag
   settings:
     username:
       from_secret: HUB_USER
