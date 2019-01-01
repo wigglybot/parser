@@ -29,6 +29,7 @@ steps:
       from_secret: HUB_USER
   when:
     branch: develop
+    event: push
 
 
 - name: docker
