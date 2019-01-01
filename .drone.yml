@@ -25,7 +25,7 @@ steps:
       from_secret: HUB_USER
     repo: pcp1976/parser
     tags:
-      - ${DRONE_BUILD_NUMBER}
+      - v${DRONE_BUILD_NUMBER}
       - latest
   when:
     branch: develop
