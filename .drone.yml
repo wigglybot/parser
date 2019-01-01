@@ -21,12 +21,12 @@ steps:
   settings:
     password:
       from_secret: HUB_PASS
+    username:
+      from_secret: HUB_USER
     repo: pcp1976/parser
     tags:
       - ${DRONE_BUILD_NUMBER}
       - latest
-    username:
-      from_secret: HUB_USER
   when:
     branch: develop
     event: push
