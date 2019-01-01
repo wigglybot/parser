@@ -20,6 +20,8 @@ steps:
   image: plugins/docker
   when:
     event:
+      include:
+      - push
       exclude:
       - tag
   settings:
