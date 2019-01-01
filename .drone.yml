@@ -18,6 +18,9 @@ steps:
 - name: docker pcp1976
   pull: true
   image: plugins/docker
+  when:
+    event:
+    - push
   settings:
     username:
       from_secret: HUB_USER
@@ -41,7 +44,7 @@ steps:
       from_secret: HUB_PASS
     repo: wigglybot/parser
     tags:
-      - $DRONE_TAG
+      - ${DRONE_TAG}
       - latest
 
 - name: upload archive
