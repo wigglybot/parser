@@ -19,7 +19,8 @@ steps:
   pull: true
   image: plugins/docker
   when:
-    branch: [ develop/* ]
+    branch:
+    - develop
   settings:
     username:
       from_secret: HUB_USER
@@ -32,8 +33,10 @@ steps:
   pull: true
   image: plugins/docker
   when:
-    branch: [ master/* ]
-    event: [ tag ]
+    branch:
+    - master
+    event:
+    - tag
   settings:
     username:
       from_secret: HUB_USER
