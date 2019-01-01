@@ -19,36 +19,28 @@ steps:
   pull: true
   image: plugins/docker
   when:
-    event:
-      include:
-      - push
-      exclude:
-      - tag
+    branch: [ develop/* ]
   settings:
     username:
       from_secret: HUB_USER
     password:
       from_secret: HUB_PASS
     repo: pcp1976/parser
-    tags:
-      - ${DRONE_BUILD_NUMBER}
-      - latest
+    tags: [ ${DRONE_BUILD_NUMBER}, latest ]
 
 - name: docker
   pull: true
   image: plugins/docker
   when:
-    event:
-    - tag
+    branch: [ master/* ]
+    event: [ tag ]
   settings:
     username:
       from_secret: HUB_USER
     password:
       from_secret: HUB_PASS
     repo: wigglybot/parser
-    tags:
-      - ${DRONE_TAG}
-      - latest
+    tags: [ ${DRONE_TAG}, latest ]
 
 - name: upload archive
   image: pcp1976/pytest-3.7:1.0.7
