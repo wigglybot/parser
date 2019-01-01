@@ -41,7 +41,7 @@ steps:
       from_secret: HUB_PASS
     repo: wigglybot/parser
     tags:
-      - ${DRONE_TAG}
+      - $DRONE_TAG
       - latest
 
 - name: upload archive
