@@ -2,6 +2,10 @@ kind: pipeline
 name: parser build
 steps:
 - name: run tests
+  when:
+    event:
+      exclude:
+      - tag
   image: pcp1976/pytest-3.7:1.0.7
   environment:
     REPOSITORY_KEY:
@@ -49,7 +53,12 @@ steps:
     event:
       exclude:
       - tag
+      - merge
 - name: upload archive
+  when:
+    event:
+      exclude:
+      - tag
   image: pcp1976/pytest-3.7:1.0.7
   environment:
     REPOSITORY_KEY:
