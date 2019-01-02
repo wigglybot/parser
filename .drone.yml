@@ -15,16 +15,18 @@ steps:
 - name: docker pcp1976
   image: plugins/docker
   settings:
-    auto_tag: true
     username:
       from_secret: HUB_USER
     password:
       from_secret: HUB_PASS
     repo: pcp1976/parser
+    tags:
+      - latest
+      - ${DRONE_BUILD_NUMBER}
   when:
     branch:
       include:
-      - develop
+      - refs/heads/develop
 - name: docker
   pull: true
   image: plugins/docker
@@ -34,11 +36,13 @@ steps:
     password:
       from_secret: HUB_PASS
     repo: wigglybot/parser
-    auto_tag: true
+    tags:
+      - latest
+      - ${DRONE_TAG}
   when:
     branch:
       include:
-      - master
+      - refs/heads/master
 - name: upload archive
   image: pcp1976/pytest-3.7:1.0.7
   environment:
