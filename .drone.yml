@@ -26,7 +26,10 @@ steps:
   when:
     branch:
       include:
-      - refs/heads/develop
+      - develop
+    event:
+      exclude:
+      - tag
 - name: docker
   pull: true
   image: plugins/docker
@@ -42,7 +45,10 @@ steps:
   when:
     branch:
       include:
-      - refs/heads/master
+      - master
+    event:
+      exclude:
+      - tag
 - name: upload archive
   image: pcp1976/pytest-3.7:1.0.7
   environment:
