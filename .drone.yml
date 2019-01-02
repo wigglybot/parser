@@ -1,11 +1,8 @@
 kind: pipeline
 name: parser build
 steps:
+
 - name: run tests
-  when:
-    event:
-      exclude:
-      - tag
   image: pcp1976/pytest-3.7:1.0.7
   environment:
     REPOSITORY_KEY:
@@ -16,6 +13,7 @@ steps:
   - pipenv run pytest --junitxml=pytest.xml
   - xsltproc -o junit.xml /opt/pytest-xunit.xsl pytest.xml
   - curl -H "X-JFrog-Art-Api:$${REPOSITORY_KEY}" -T junit.xml "$${ARTIFACTORY_URL}/artifactory/wigglybot/${DRONE_COMMIT_BRANCH}/parser/junit.xml"
+
 - name: docker pcp1976
   image: plugins/docker
   settings:
@@ -27,38 +25,8 @@ steps:
     tags:
       - latest
       - ${DRONE_BUILD_NUMBER}
-  when:
-    branch:
-      include:
-      - develop
-    event:
-      exclude:
-      - tag
-- name: docker
-  pull: true
-  image: plugins/docker
-  settings:
-    username:
-      from_secret: HUB_USER
-    password:
-      from_secret: HUB_PASS
-    repo: wigglybot/parser
-    tags:
-      - latest
-      - ${DRONE_TAG}
-  when:
-    branch:
-      include:
-      - master
-    event:
-      exclude:
-      - tag
-      - merge
+
 - name: upload archive
-  when:
-    event:
-      exclude:
-      - tag
   image: pcp1976/pytest-3.7:1.0.7
   environment:
     REPOSITORY_KEY:
